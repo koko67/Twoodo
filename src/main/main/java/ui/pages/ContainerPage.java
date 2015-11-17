@@ -15,8 +15,12 @@ public class ContainerPage extends BasePageObject{
     private LeftMembersPanel leftMembersPanel;
     private PostComponentPage postComponentPage;
 
+    @FindBy(id = "content")
     private WebElement postingComponent;
 
+    public ContainerPage(){
+        postComponentPage = new PostComponentPage();
+    }
 
     public LeftTeamsPanel getLeftTeamsPanel() {
         return leftTeamsPanel;
@@ -31,11 +35,15 @@ public class ContainerPage extends BasePageObject{
     }
 
     public boolean existsPost(String postContent){
-        return postingComponent.findElement(By.xpath("//div[@class='right']/div[@class='content']/p/div[@class='post-content']/div/span[contains(text(), " + postContent)) == null;
+        return postingComponent.findElement(By.xpath("//div[@class='right']/div[@class='content']/p/div[@class='post-content']/div/span[contains(text(), '" + postContent + "')]")) == null;
+    }
+
+    public boolean existsUserName(String username){
+        return postComponentPage.userProfile.getAttribute("alt").equals(username);
     }
 
     @Override
     public void waitUntilPageObjectIsLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(postComponentPage.userProfile));
+        wait.until(ExpectedConditions.visibilityOf(postComponentPage.postTextArea));
     }
 }

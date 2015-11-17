@@ -1,12 +1,13 @@
 package steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import framework.BrowserManager;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import ui.pages.ContainerPage;
 import ui.pages.LoginPage;
 
@@ -43,8 +44,9 @@ public class Login {
                     .clickLoginButtonSuccessful();
     }
 
+
     @Then("^I should login to$")
-    public void loginSuccess() {
-        //Assert.assertTrue(containerPage.existsUserName());
+    public void I_should_login_to() throws Throwable {
+        Assert.assertTrue(containerPage.existsUserName("@jorge"));
     }
 }

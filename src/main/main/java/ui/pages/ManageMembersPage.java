@@ -1,6 +1,5 @@
 package ui.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,7 +8,7 @@ import ui.BasePageObject;
 /**
  * Created by jorgeavila on 11/16/2015.
  */
-public class MembersCreationPage extends BasePageObject{
+public class ManageMembersPage extends BasePageObject{
 
     @FindBy(xpath = "//li[@class='active']/a[@href='#team-members' and contains(text(), 'Members')]")
     protected WebElement membersTab;
@@ -23,17 +22,17 @@ public class MembersCreationPage extends BasePageObject{
     @FindBy(xpath = "//div[@id='postFocus']/div[@class='extruder-toggler']/i[contains(text(),'')]")
     protected WebElement closeButton;
 
-    public MembersCreationPage clickOnMembers(){
+    public ManageMembersPage clickOnMembers(){
         membersTab.click();
         return this;
     }
 
-    public MembersCreationPage setNewMember(String member){
+    public ManageMembersPage setNewMember(String member){
         inputNewMemberUser.sendKeys(member);
         return this;
     }
 
-    public MembersCreationPage clickInviteMember(){
+    public ManageMembersPage clickInviteMember(){
         inviteButton.click();
         return this;
     }

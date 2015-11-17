@@ -37,16 +37,10 @@ public class DirectMessagesSteps {
 
     @Given("^a team Created called \"([^\"]*)\"$")
     public void a_team_Created_called(String name) throws Throwable {
-        driver = manager.getDriver();
-        driver.get("https://www.twoodo.com/login");
-        containerPage = loginpage.typeUserName("jorgetop14@gmail.com")
-                .typeUserPassword("Control123")
-                .clickLoginButtonSuccessful();
-
         teamName = name;
         containerPage.getLeftTeamsPanel()
                 .clickCreateNewTeam()
-                .createTeam(name);
+                .createTeam(teamName);
     }
 
     @And("^the Team has a member called \"([^\"]*)\"$")

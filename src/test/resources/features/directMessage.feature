@@ -4,7 +4,9 @@ Feature: Messaging
     This is the test about sending messages between members in a team
 
 Background:
-    Given a team Created called "TheTeam"
+    Given I navigate to Login Page
+    And I Login as "jorge.avila@fundacion-jala.org" with Password "Control123"
+    And a team Created called "TheTeam"
     And the Team has a member called "@Jorge"
 
 Scenario: Send a message to a team member

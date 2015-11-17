@@ -7,9 +7,9 @@ public class LeftMembersPanel extends LeftPanelPage {
 
     public final static String ADD_TEAMMATE = "Add a teammate";
 
-    public MembersCreationPage clickCreateNewMember(){
+    public ManageMembersPage clickCreateNewMember(){
         clickElementForCreationByText(ADD_TEAMMATE);
-        return new MembersCreationPage();
+        return new ManageMembersPage();
     }
 
     public ContainerPage clickSelectAMember(String teamName){

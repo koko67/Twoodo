@@ -2,18 +2,20 @@ package ui.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import ui.BasePageObject;
 
 /**
  * Created by jorgeavila on 11/16/2015.
  */
-public class PostComponentPage {
+public class PostComponentPage extends BasePageObject{
 
     private static String SEND_BUTTON_NAME = "Send";
 
     @FindBy(xpath = "//div[@class='company']/div[@class='dropdown']/button")
     protected WebElement headerDropDown;
 
-    @FindBy(xpath = "//form[@id='cb-164d3883-6886-4bad-8733-49aa0fa5df1d']/div[@class='right']/div/div/textarea[@wrap='off']")
+    @FindBy(xpath = "//form/div[@class='right']/div[1]/div[1]/textarea")
     protected WebElement postTextArea;
 
     @FindBy(xpath = "//button[@type='submit']/span[contains(text(), 'Send')]")
@@ -38,13 +40,18 @@ public class PostComponentPage {
         return this;
     }
 
-    public PostComponentPage clickSend(){
+    public ContainerPage clickSend(){
         sendButton.click();
-        return this;
+        return new ContainerPage();
     }
 
     public LoginPage logout(){
         buttonLogout.click();
         return new LoginPage();
+    }
+
+    @Override
+    public void waitUntilPageObjectIsLoaded() {
+        wait.until(ExpectedConditions.visibilityOf(headerDropDown));
     }
 }
