@@ -23,11 +23,20 @@ public class SearchSteps {
     @Before
     public void setUp(){
         containerPage = new ContainerPage();
-        searchPage = new SearchPage();
+        textToSearch = "yellowSubmarine";
+    }
+
+    @And("^I posted \"([^\"]*)\"$")
+    public void I_posted(String post) throws Throwable {
+        textToSearch = post;
+        containerPage.getPostComponentPage()
+                .typeTextArea(textToSearch)
+                .clickSend();
     }
 
     @Given("^I enter a text to search$")
     public void I_make_a_post_called() throws Throwable {
+        searchPage = new SearchPage();
         searchPage.setTextToSearch(textToSearch);
     }
 
@@ -43,11 +52,5 @@ public class SearchSteps {
 //        Assert.assertTrue(existPost);
     }
 
-    @And("^I posted \"([^\"]*)\"$")
-    public void I_posted(String post) throws Throwable {
-        textToSearch = post;
-        containerPage.getPostComponentPage()
-                .typeTextArea(textToSearch)
-                .clickSend();
-    }
+
 }

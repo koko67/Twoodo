@@ -21,6 +21,7 @@ public class BrowserManager {
     public void init(){
         System.setProperty("webdriver.chrome.driver", "C://chromedriver.exe");
         driver = new ChromeDriver();
+//        driver = new FirefoxDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 60, 1000);

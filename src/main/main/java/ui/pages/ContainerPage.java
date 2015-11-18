@@ -11,12 +11,12 @@ import ui.BasePageObject;
  */
 public class ContainerPage extends BasePageObject{
 
-    private LeftTeamsPanel leftTeamsPanel;
-    private LeftMembersPanel leftMembersPanel;
-    private PostComponentPage postComponentPage;
+    LeftTeamsPanel leftTeamsPanel;
+    LeftMembersPanel leftMembersPanel;
+    PostComponentPage postComponentPage;
 
     @FindBy(id = "content")
-    private WebElement postingComponent;
+    WebElement postingComponent;
 
     public ContainerPage(){
         postComponentPage = new PostComponentPage();
@@ -39,11 +39,15 @@ public class ContainerPage extends BasePageObject{
     }
 
     public boolean existsUserName(String username){
-        return postComponentPage.userProfile.getAttribute("alt").equals(username);
+        return postComponentPage.existsUserName(username);
     }
+
+
 
     @Override
     public void waitUntilPageObjectIsLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(postComponentPage.postTextArea));
+        System.out.println("enter");
+        wait.until(ExpectedConditions.visibilityOf(postComponentPage.headerDropDown));
+        System.out.println("exit");
     }
 }

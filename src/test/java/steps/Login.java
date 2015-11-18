@@ -36,9 +36,6 @@ public class Login {
 
     @When("^I Login as \"([^\"]*)\" with Password \"([^\"]*)\"$")
     public void login(String user, String password) {
-        System.out.print("######### ");
-        System.out.print(loginPage == null);
-        System.out.print(loginPage);
         containerPage =  loginPage.typeUserName(user)
                     .typeUserPassword(password)
                     .clickLoginButtonSuccessful();

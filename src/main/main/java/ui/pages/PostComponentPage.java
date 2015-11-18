@@ -13,22 +13,30 @@ public class PostComponentPage extends BasePageObject{
     private static String SEND_BUTTON_NAME = "Send";
 
     @FindBy(xpath = "//div[@class='company']/div[@class='dropdown']/button")
-    protected WebElement headerDropDown;
+    WebElement headerDropDown;
 
-    @FindBy(xpath = "//form/div[@class='right']/div[1]/div[1]/textarea")
-    protected WebElement postTextArea;
+    //@FindBy(xpath = "//html/body/div[2]/div[1]/div/command-box/form/div[2]/div[1]/div[1]/textarea")
+    @FindBy(xpath = "//div[@id='main-cb']//div/pre/span")
+    WebElement postTextArea;
 
     @FindBy(xpath = "//button[@type='submit']/span[contains(text(), 'Send')]")
-    protected WebElement sendButton;
+    WebElement sendButton;
 
     @FindBy(xpath = "//div[@class='btn-group']/a[@title='Make it a task' and contains(text(), 'Task')]")
-    protected WebElement taskButton;
+    WebElement taskButton;
 
-    @FindBy(xpath = "/html/body/div[2]/top-header-bar/div[1]/div/button/img")
-    protected WebElement userProfile;
+    @FindBy(xpath = "//html/body/div[2]/top-header-bar/div[1]/div/button/img")
+    WebElement userProfile;
 
     @FindBy(id = "logout")
-    protected WebElement buttonLogout;
+    WebElement buttonLogout;
+
+    @FindBy(id = "main-cb")
+    WebElement centerContainer;
+
+    public PostComponentPage(){
+        //this.waitUntilPageObjectIsLoaded();
+    }
 
 
     public void clickHeadeDropDown(){
@@ -36,6 +44,11 @@ public class PostComponentPage extends BasePageObject{
     }
 
     public PostComponentPage typeTextArea(String content){
+        System.out.println("WAITING.....");
+        wait.until(ExpectedConditions.visibilityOf(userProfile));
+        System.out.println(postTextArea + "-----");
+        System.out.println("WAITING#####");
+
         postTextArea.sendKeys(content);
         return this;
     }
@@ -52,6 +65,14 @@ public class PostComponentPage extends BasePageObject{
 
     @Override
     public void waitUntilPageObjectIsLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(headerDropDown));
+        System.out.println("###$###" + centerContainer);
+        System.out.println("###$###" + centerContainer);
+        System.out.println("###$###" + centerContainer);
+        System.out.println("###$###" + centerContainer);
+        wait.until(ExpectedConditions.visibilityOf(centerContainer));
+    }
+
+    public boolean existsUserName(String username) {
+        return userProfile.getAttribute("alt").equals(username);
     }
 }
