@@ -1,5 +1,6 @@
 package ui.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -23,5 +24,9 @@ public class LeftTeamsPanel extends LeftPanelPage {
     public ContainerPage clickSelectATeam(String teamName){
         clickElementForSelectionByText(teamName);
         return new ContainerPage();
+    }
+
+    public boolean existsNotification(){
+        return teamsContainer.findElement(By.xpath("//a/span[contains(text(), '1')]")) == null;
     }
 }

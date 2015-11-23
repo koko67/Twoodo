@@ -33,7 +33,6 @@ public class DirectMessagesSteps {
 
     @Given("^a team Created called \"([^\"]*)\"$")
     public void a_team_Created_called(String name) throws Throwable {
-        teamName = name;
         containerPage.getLeftTeamsPanel()
                 .clickCreateNewTeam()
                 .createTeam(teamName);
@@ -48,8 +47,9 @@ public class DirectMessagesSteps {
     }
 
 
-    @Given("^I enter to a Team created$")
-    public void I_enter_to_a_Team_created() throws Throwable {
+    @Given("^I enter to a Team created called \"([^\"]*)\"$")
+    public void I_enter_to_a_Team_created(String name) throws Throwable {
+        teamName = name;
         containerPage.getLeftTeamsPanel()
                 .clickSelectATeam(teamName);
     }
@@ -72,7 +72,7 @@ public class DirectMessagesSteps {
 
     @Then("^the destination member should has a notification when this do login$")
     public void the_destination_member_should_has_a_notification_when_this_do_login() throws Throwable {
-        boolean existsNotification = containerPage.getPostComponentPage()
+        boolean existsNotification = containerPage.clickUserButton()
                 .logout()
                 .typeUserName("jorge.avila@fundacion-jala.org")
                 .typeUserPassword("Control123")

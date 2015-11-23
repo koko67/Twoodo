@@ -15,8 +15,24 @@ public class ContainerPage extends BasePageObject{
     LeftMembersPanel leftMembersPanel;
     PostComponentPage postComponentPage;
 
+    //###### header dropdown components
+
+    @FindBy(xpath = "//div[@class='company']/div[@class='dropdown']/button")
+    WebElement headerDropDown;
+
+    WebElement buttonTeamSettings;
+
+
+    @FindBy(xpath = "//div[@id='logged-user']//button[@data-toggle='dropdown']/img")
+    WebElement userProfile;
+
+    @FindBy(id = "logout")
+    WebElement buttonLogout;
+
     @FindBy(id = "content")
     WebElement postingComponent;
+
+
 
     public ContainerPage(){
         leftTeamsPanel = new LeftTeamsPanel();
@@ -37,19 +53,32 @@ public class ContainerPage extends BasePageObject{
     }
 
     public boolean existsPost(String postContent){
-        return postingComponent.findElement(By.xpath("//div[@class='right']/div[@class='content']/p/div[@class='post-content']/div/span[contains(text(), '" + postContent + "')]")) == null;
+        return postingComponent.findElement(By.xpath("//div[@class='right']/div[@class='content']/p/div[@class='post-content']/div/span[contains(text(), '" + postContent + "')]")) != null;
+    }
+
+    public ContainerPage clickUserButton(){
+        userProfile.click();
+        return this;
+    }
+
+    public LoginPage clickLogout(){
+        return new LoginPage();
+    }
+
+
+    public LoginPage logout(){
+        buttonLogout.click();
+        return new LoginPage();
     }
 
     public boolean existsUserName(String username){
-        return postComponentPage.existsUserName(username);
+        return userProfile.getAttribute("alt").equals("username");
     }
 
 
 
     @Override
     public void waitUntilPageObjectIsLoaded() {
-        System.out.println("enter");
-        wait.until(ExpectedConditions.visibilityOf(postComponentPage.headerDropDown));
-        System.out.println("exit");
+
     }
 }

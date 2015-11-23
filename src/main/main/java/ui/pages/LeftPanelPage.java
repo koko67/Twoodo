@@ -34,7 +34,7 @@ public class LeftPanelPage extends BasePageObject {
     }
 
     public WebElement findNotificationIcon(){
-        return notification = driver.findElement(By.xpath("//span[@class='counter' and contains(@style, 'display: inline-block;')]"));
+        return notification = driver.findElement(By.xpath("//div[@class='section']/a/span[contains(text(), '1')]"));
     }
 
     @Override

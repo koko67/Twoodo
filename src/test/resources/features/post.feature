@@ -3,11 +3,17 @@
 Feature: Posting
     This File test contains all scenarios related with create posts in a team project
 
+Background:
+Given a team Created called "TheTeam"
+    And the Team has a member that is  "jorge.avila@fundacion-jalaorg"
+
 @Test
 Scenario assign a TODO to a teammate
-Given I have posted a TODO in a team
-When I change the default assignee to another team member
-Then a notification counter should be displayed in the team on the teams panel for the member who has assigned the TODO
+Given I type the name o a member called "@javila"
+And I type the TODO tag "#todo" with value "first task"
+When I click in the button Add task
+Then the new task should be added in the posts section
+    And a notification counter should be displayed in the team on the teams panel for the member who has assigned the TODO
     And clicking over that team the TODO should be displayed as a post in the posts in the right panel
 
 

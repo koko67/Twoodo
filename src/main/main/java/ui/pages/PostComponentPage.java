@@ -18,8 +18,7 @@ public class PostComponentPage extends BasePageObject{
 
     private static String SEND_BUTTON_NAME = "Send";
 
-    @FindBy(xpath = "//div[@class='company']/div[@class='dropdown']/button")
-    WebElement headerDropDown;
+
 
     //@FindBy(xpath = "//html/body/div[2]/div[1]/div/command-box/form/div[2]/div[1]/div[1]/textarea")
     //@FindBy(xpath = "//div[@id='main-container']/div[@class='center-container']/div[@id='main-cb']//command-box/form/div[@class='right']/div/div/textarea[@wrap='off']")
@@ -32,12 +31,6 @@ public class PostComponentPage extends BasePageObject{
     @FindBy(xpath = "//div[@class='btn-group']/a[@title='Make it a task' and contains(text(), 'Task')]")
     WebElement taskButton;
 
-    @FindBy(xpath = "//html/body/div[2]/top-header-bar/div[1]/div/button/img")
-    WebElement userProfile;
-
-    @FindBy(id = "logout")
-    WebElement buttonLogout;
-
     @FindBy(id = "main-cb")
     WebElement centerContainer;
 
@@ -48,18 +41,13 @@ public class PostComponentPage extends BasePageObject{
         //waitUntilPageObjectIsLoaded();
     }
 
-
-    public void clickHeadeDropDown(){
-        headerDropDown.click();
-    }
-
     public PostComponentPage typeTextArea(String content) throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOf(centerContainer));
 
         postTextArea = centerContainer.findElement(By.xpath("//form/div[@class='right']/div[1]/div[1]/textarea"));
         Actions actions = new Actions(driver);
 
-        Thread.sleep(5000);
+//        Thread.sleep(5000);
         actions.moveToElement(driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/command-box/form/div[2]/div[1]/div[4]/div[1]/div/div/div/div[5]/pre")))
                 .click()
                 .sendKeys(content)
@@ -77,17 +65,8 @@ public class PostComponentPage extends BasePageObject{
         return new ContainerPage();
     }
 
-    public LoginPage logout(){
-        buttonLogout.click();
-        return new LoginPage();
-    }
-
     @Override
     public void waitUntilPageObjectIsLoaded() {
         wait.until(ExpectedConditions.visibilityOf(centerContainer));
-    }
-
-    public boolean existsUserName(String username) {
-        return userProfile.getAttribute("alt").equals(username);
     }
 }

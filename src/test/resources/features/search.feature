@@ -9,6 +9,6 @@ Background:
   And I posted "yellowSubmarine"
 
 Scenario: make a search of something that was posted or sent in a company
-  Given I enter a text to search
+  Given I enter a text to search that is "yellowSubmarine"
   When I click in the search button
   Then a result with the text entered should be displayed in the search content

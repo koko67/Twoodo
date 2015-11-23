@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.BasePageObject;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by jorgeavila on 11/16/2015.
  */
@@ -43,7 +45,8 @@ public class ManageMembersPage extends BasePageObject{
     }
 
     public void addNewMemberShip(String member){
-        clickOnMembers();
+//        clickOnMembers();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         setNewMember(member);
         clickInviteMember();
         closeMembersCreationDialog();

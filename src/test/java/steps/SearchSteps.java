@@ -28,14 +28,14 @@ public class SearchSteps {
 
     @And("^I posted \"([^\"]*)\"$")
     public void I_posted(String post) throws Throwable {
-        textToSearch = post;
         containerPage.getPostComponentPage()
-                .typeTextArea(textToSearch)
+                .typeTextArea(post)
                 .clickSend();
     }
 
-    @Given("^I enter a text to search$")
-    public void I_make_a_post_called() throws Throwable {
+    @Given("^I enter a text to search that is \"([^\"]*)\"$")
+    public void I_make_a_post_called(String textSearch) throws Throwable {
+        textToSearch = textSearch;
         searchPage = new SearchPage();
         searchPage.setTextToSearch(textToSearch);
     }
@@ -49,7 +49,7 @@ public class SearchSteps {
     @Then("^a result with the text entered should be displayed in the search content$")
     public void the_result_should_display_a_result_of_that_word_searched() throws Throwable {
         boolean existPost = containerPage.existsPost(textToSearch);
-//        Assert.assertTrue(existPost);
+        Assert.assertTrue(existPost);
     }
 
 
