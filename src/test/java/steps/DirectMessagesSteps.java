@@ -19,9 +19,7 @@ public class DirectMessagesSteps {
     BrowserManager manager = BrowserManager.getInstance();
     WebDriver driver;
 
-    private ContainerPage containerPage;
-
-    private LoginPage loginpage;
+    ContainerPage containerPage;
 
     private String teamName;
     private String memberName;
@@ -30,9 +28,7 @@ public class DirectMessagesSteps {
 
     @Before
     public void setUp(){
-
-        loginpage = new LoginPage();
-
+        containerPage = new ContainerPage();
     }
 
     @Given("^a team Created called \"([^\"]*)\"$")
@@ -43,7 +39,7 @@ public class DirectMessagesSteps {
                 .createTeam(teamName);
     }
 
-    @And("^the Team has a member called \"([^\"]*)\"$")
+    @And("^the Team has a member that is  \"([^\"]*)\"$")
     public void the_Team_has_a_member_called(String name) throws Throwable {
         memberName = name;
         containerPage.getLeftMembersPanel()
@@ -58,10 +54,11 @@ public class DirectMessagesSteps {
                 .clickSelectATeam(teamName);
     }
 
-    @And("^I select a member of that team$")
-    public void I_select_a_member_of_that_team() throws Throwable {
+    @And("^I select the member of that team that is \"([^\"]*)\"$")
+    public void I_select_a_member_of_that_team(String member) throws Throwable {
+        memberName = member;
         containerPage.getLeftMembersPanel()
-                .clickSelectAMember(teamName);
+                .clickSelectAMember(memberName);
     }
 
     @When("^I send a direct message to that team member as \"([^\"]*)\"$")

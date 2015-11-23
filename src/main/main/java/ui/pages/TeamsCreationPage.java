@@ -11,19 +11,19 @@ import ui.BasePageObject;
 public class TeamsCreationPage extends BasePageObject {
 
     @FindBy(xpath = "//input[@placeholder='Your team name']")
-    protected WebElement inputTeamName;
+    WebElement inputTeamName;
 
     @FindBy(xpath = "//button[@class='btn btn-primary btn-lg btn-block' and contains(text(),'Next')]")
-    protected WebElement buttonNext;
+    WebElement buttonNext;
 
     @FindBy(xpath = "//input[@placeholder='Enter an email or username...']")
-    protected WebElement inputNewMember;
+    WebElement inputNewMember;
 
     @FindBy(xpath = "//a[contains(text(), 'Invite people later, next')]")
-    protected WebElement linkPeopleLater;
+    WebElement linkPeopleLater;
 
     @FindBy(xpath = "//button[@type='submit' and contains(text(), ' Create team')]")
-    protected WebElement buttonCreateNewTeam;
+    WebElement buttonCreateNewTeam;
 
 
     public TeamsCreationPage setTeamNameForCreating(String teamName){

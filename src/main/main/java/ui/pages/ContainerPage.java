@@ -19,6 +19,8 @@ public class ContainerPage extends BasePageObject{
     WebElement postingComponent;
 
     public ContainerPage(){
+        leftTeamsPanel = new LeftTeamsPanel();
+        leftMembersPanel = new LeftMembersPanel();
         postComponentPage = new PostComponentPage();
     }
 

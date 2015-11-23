@@ -7,7 +7,8 @@ public class LeftMembersPanel extends LeftPanelPage {
 
     public final static String ADD_TEAMMATE = "Add a teammate";
 
-    public ManageMembersPage clickCreateNewMember(){
+    public ManageMembersPage clickCreateNewMember() throws InterruptedException {
+        Thread.sleep(2000);
         clickElementForCreationByText(ADD_TEAMMATE);
         return new ManageMembersPage();
     }

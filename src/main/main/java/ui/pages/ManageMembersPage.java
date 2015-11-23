@@ -10,10 +10,10 @@ import ui.BasePageObject;
  */
 public class ManageMembersPage extends BasePageObject{
 
-    @FindBy(xpath = "//li[@class='active']/a[@href='#team-members' and contains(text(), 'Members')]")
+    @FindBy(xpath = "//li[@class='active']/a[contains(text(), 'Members')]")
     protected WebElement membersTab;
 
-    @FindBy(xpath = "//div/input[@placeholder='Enter username or email']")
+    @FindBy(xpath = "//div/input[@placeholder='Enter an email']")
     protected WebElement inputNewMemberUser;
 
     @FindBy(xpath = "//span/button[@type='submit']/span[contains(text(), 'Invite')]")

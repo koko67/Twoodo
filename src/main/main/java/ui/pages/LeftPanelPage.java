@@ -11,18 +11,25 @@ import ui.BasePageObject;
  */
 public class LeftPanelPage extends BasePageObject {
 
+    @FindBy(xpath = "")
+    WebElement leftContainer;
+
     protected WebElement leftPanelComponent;
 
-    private CompanyPanel companyPanel;
-    private WebElement notification;
+    CompanyPanel companyPanel;
+    WebElement notification;
+
+    public LeftPanelPage (){
+
+    }
 
     public void clickElementForCreationByText(String text){
-        leftPanelComponent = driver.findElement(By.xpath("//div[@class='section']/a/span[contains(text(), " + text));
+        leftPanelComponent = driver.findElement(By.xpath("//menu-left[@id='menu-left-content']//div/a[contains(text(), '" + text + "')]"));
         leftPanelComponent.click();
     }
 
     public void clickElementForSelectionByText(String text){
-        leftPanelComponent = driver.findElement(By.xpath("//div[@class='section']/a[contains(text(), " + text));
+        leftPanelComponent = driver.findElement(By.xpath("//menu-left[@id='menu-left-content']//div/a/span[contains(text(), '" + text + "')]"));
         leftPanelComponent.click();
     }
 
