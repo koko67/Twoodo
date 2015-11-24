@@ -3,9 +3,6 @@
 Feature: Team Members
   This is the test about left teams
 
-  Background:
-    Given a team Created called "TheTeam"
-
   Scenario: left current team company
     Given I enter to a Team created called "TheTeam"
     And I enter to the team settings
