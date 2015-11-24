@@ -1,5 +1,6 @@
 package ui.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,16 +14,22 @@ import java.util.concurrent.TimeUnit;
 public class ManageMembersPage extends BasePageObject{
 
     @FindBy(xpath = "//li[@class='active']/a[contains(text(), 'Members')]")
-    protected WebElement membersTab;
+    WebElement membersTab;
 
-    @FindBy(xpath = "//div/input[@placeholder='Enter an email']")
-    protected WebElement inputNewMemberUser;
+    @FindBy(xpath = "//div[@id='team-members']/form//input[@placeholder='Enter an email' or @placeholder='Enter username or email']")
+    WebElement inputNewMemberUser;
 
     @FindBy(xpath = "//span/button[@type='submit']/span[contains(text(), 'Invite')]")
-    protected WebElement inviteButton;
+    WebElement inviteButton;
 
     @FindBy(xpath = "//div[@id='postFocus']/div[@class='extruder-toggler']/i[contains(text(),'')]")
-    protected WebElement closeButton;
+    WebElement closeButton;
+
+    @FindBy(xpath = "//div[@id='team-general']//a[contains(text(), 'Delete team')]")
+    WebElement linkDeletingTeam;
+
+    @FindBy(xpath = "//div[@class='sa-button-container']//button[contains(text(), 'Yes, do it')]")
+    WebElement buttonConfirmDeleting;
 
     public ManageMembersPage clickOnMembers(){
         membersTab.click();
@@ -39,7 +46,7 @@ public class ManageMembersPage extends BasePageObject{
         return this;
     }
 
-    public ContainerPage closeMembersCreationDialog(){
+    public ContainerPage closeManageMembersDialog(){
         closeButton.click();
         return new ContainerPage();
     }
@@ -49,11 +56,29 @@ public class ManageMembersPage extends BasePageObject{
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         setNewMember(member);
         clickInviteMember();
-        closeMembersCreationDialog();
+        closeManageMembersDialog();
     }
 
     @Override
     public void waitUntilPageObjectIsLoaded() {
         wait.until(ExpectedConditions.visibilityOf(inputNewMemberUser));
+    }
+
+    public ManageMembersPage clickLinkDeleteTeam(){
+//        linkDeletingTeam = driver.findElement(By.xpath("//div[@id='team-general']//a[contains(text(), 'Delete team')]"));
+        wait.until(ExpectedConditions.visibilityOf(linkDeletingTeam));
+        linkDeletingTeam.click();
+        return this;
+    }
+
+    public ContainerPage confirmDeletingTeam() throws InterruptedException {
+        Thread.sleep(1000);
+        buttonConfirmDeleting = driver.findElement(By.xpath("//div[@class='sa-button-container']//button[contains(text(), 'Yes, do it')]"));
+        buttonConfirmDeleting.click();
+        return new ContainerPage();
+    }
+
+    public void removeMemberByName(String membername) {
+
     }
 }

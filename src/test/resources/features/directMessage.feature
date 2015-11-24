@@ -11,7 +11,7 @@ Given I navigate to Login Page
 
 Scenario: Send a message to a team member
 Given I enter to a Team created called "TheTeam"
-    And I select the member of that team that is "Jon Snow"
+    And I select the member of that team that is "@javila"
 When I send a direct message to that team member as "Hi there"
 Then the destination member should has a notification when this do login
     And the message must be the same that I sent

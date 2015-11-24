@@ -16,7 +16,7 @@ public class LeftMembersPanel extends LeftPanelPage {
 
     public final static String ADD_TEAMMATE = "Add a teammate";
 
-    public ManageMembersPage clickCreateNewMember() throws InterruptedException {
+    public ManageMembersPage clickCreateNewMemberInTheCompany() throws InterruptedException {
         Thread.sleep(2000);
         clickElementForCreationByText(ADD_TEAMMATE);
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);

@@ -1,6 +1,5 @@
 package steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -35,14 +34,14 @@ public class DirectMessagesSteps {
     public void a_team_Created_called(String name) throws Throwable {
         containerPage.getLeftTeamsPanel()
                 .clickCreateNewTeam()
-                .createTeam(teamName);
+                .createTeam(name);
     }
 
     @And("^the Team has a member that is  \"([^\"]*)\"$")
     public void the_Team_has_a_member_called(String name) throws Throwable {
         memberName = name;
         containerPage.getLeftMembersPanel()
-                .clickCreateNewMember()
+                .clickCreateNewMemberInTheCompany()
                 .addNewMemberShip(name);
     }
 

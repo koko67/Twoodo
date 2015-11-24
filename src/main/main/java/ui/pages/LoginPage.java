@@ -21,7 +21,12 @@ public class LoginPage extends BasePageObject {
     @FindBy(xpath = "/html/body/div[1]/form[1]/button")
     protected WebElement loginButton;
 
+    public LoginPage(){
+//        waitUntilPageObjectIsLoaded();
+    }
+
     public LoginPage typeUserName(String username){
+        waitUntilPageObjectIsLoaded();
         this.username.clear();
         this.username.sendKeys(username);
         return this;
