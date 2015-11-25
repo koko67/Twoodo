@@ -71,8 +71,13 @@ public class TeamMemberSteps {
                 .clickButtonTeamMembers();
     }
 
-    @And("^I remove that member who has a user name \"([^\"]*)\"$")
+    @And("^I click the remove button of that member who has a user name \"([^\"]*)\"$")
     public void I_remove_that_member_who_has_a_user_name(String membername) throws Throwable {
-        manageMembersPage.removeMemberByName(membername);
+        manageMembersPage.clickRemoveMemberByName(membername);
+    }
+
+    @And("^I accept the confirm message dialog$")
+    public void I_accept_the_confirm_message_dialog() throws Throwable {
+        manageMembersPage.confirmRemoveMember();
     }
 }

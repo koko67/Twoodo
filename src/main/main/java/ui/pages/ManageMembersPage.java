@@ -31,6 +31,9 @@ public class ManageMembersPage extends BasePageObject{
     @FindBy(xpath = "//div[@class='sa-button-container']//button[contains(text(), 'Yes, do it')]")
     WebElement buttonConfirmDeleting;
 
+    @FindBy(xpath = "//div[@id='account-members']/table")
+    WebElement tableMembers;
+
     public ManageMembersPage clickOnMembers(){
         membersTab.click();
         return this;
@@ -78,7 +81,17 @@ public class ManageMembersPage extends BasePageObject{
         return new ContainerPage();
     }
 
-    public void removeMemberByName(String membername) {
-
+    public ManageMembersPage clickRemoveMemberByName(String membername) {
+        tableMembers.findElement(By.xpath("//div[@id='account-members']/table//span[contains(text(), '" + membername +"')]/../../../td//button/i")).click();
+        return this;
     }
+
+    public ManageMembersPage confirmRemoveMember() throws InterruptedException {
+        Thread.sleep(1000);
+        buttonConfirmDeleting = driver.findElement(By.xpath("//div[@class='sa-button-container']//button[contains(text(), 'Yes, do it')]"));
+        buttonConfirmDeleting.click();
+        return this;
+    }
+
+    public boolean
 }

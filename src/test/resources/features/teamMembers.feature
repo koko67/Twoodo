@@ -22,6 +22,6 @@ Scenario: Delete a member from a team
   When I add a new member with mail "jorge.avila@fundacion-jala.org" in that team
   Then an information message should be displayed
   When I enter to the member settings of the team
-    And I remove that member who has a user name "@javila"
+    And I click the remove button of that member who has a user name "@javila"
     And I accept the confirm message dialog
   Then the member should be removed from the members panel
