@@ -1,26 +1,36 @@
-//package runner;
-//
-//import common.CommonMethods;
-//import cucumber.api.CucumberOptions;
-//import cucumber.api.testng.AbstractTestNGCucumberTests;
-//import framework.DriverManager;
-//import org.apache.log4j.Logger;
-//import org.testng.annotations.AfterTest;
-//
-///**
-// * Created by silvia valencia on 11/9/2015.
-// */
-//public class RunCukesTest  extends AbstractTestNGCucumberTests {
-//
-//    @AfterTest
-//    public void afterExecution() {
-//        try {
-//            CommonMethods.logOut();
-//        } catch (Exception e) {
-////            log.error("Unable to logout after execution", e);
-//        } finally {
-//            DriverManager.getInstance().quitDriver();
-//        }
-//    }
-//
-//}
+package runner;
+
+import framework.BrowserManager;
+import cucumber.api.CucumberOptions;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
+import org.apache.log4j.Logger;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import common.CommonMethods;
+
+@CucumberOptions(
+        plugin = {"pretty", "html:target/cucumber", "json:target/cucumber.json"},
+        glue={"steps"},
+        features = {"src/test/resources/features"},
+        monochrome = true)
+public class RunCukesTest  extends AbstractTestNGCucumberTests {
+    final static Logger logger = Logger.getLogger(RunCukesTest.class);
+    @BeforeTest
+    public void beforeTest()
+    {
+        System.out.println("Before all the execution");
+        CommonMethods.goToLoginPage();
+    }
+
+    @AfterTest
+    public void afterExecution() {
+        try {
+            if(CommonMethods.isAccountLogged()){
+//                CommonMethods.logout();
+            }
+            BrowserManager.getInstance().getDriver().quit();
+        } catch (Exception e) {
+            logger.error("Error exiting from driver", e);
+        }
+    }
+}

@@ -83,7 +83,9 @@ public class DirectMessagesSteps {
 
     @And("^the message must be the same that I sent$")
     public void the_message_must_be_the_same_that_I_sent() throws Throwable {
-        boolean existsMessage = containerPage.existsPost(messageToDeliver);
+        boolean existsMessage = containerPage
+                .getPostsPanelPage()
+                .existsPost(messageToDeliver);
         Assert.assertTrue(existsMessage);
     }
 }

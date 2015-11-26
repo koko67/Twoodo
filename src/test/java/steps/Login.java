@@ -1,6 +1,6 @@
 package steps;
 
-import cucumber.api.PendingException;
+import common.CommonMethods;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -8,6 +8,7 @@ import cucumber.api.java.en.When;
 import framework.BrowserManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import ui.PageTransporter;
 import ui.pages.ContainerPage;
 import ui.pages.LoginPage;
 
@@ -27,20 +28,31 @@ public class Login {
         loginPage = new LoginPage();
     }
 
+    @When("^I am logged on the page with user \"([^\"]*)\" and Password \"([^\"]*)\"$")
+    public void login(String user, String password) {
+        if(!CommonMethods.isAccountLogged()){
+            PageTransporter.getInstance().goToLoginPage();
+            loginSuccessful(user, password);
+        } else {
+            System.out.println("already in homepage");
+        }
+    }
 
     @Given("^I navigate to Login Page$")
     public void goToLoginPage() {
-        driver = manager.getDriver();
-        driver.get("https://www.twoodo.com/login");
+        if(!CommonMethods.isBrowserInLoginPage()){
+            PageTransporter.getInstance().goToLoginPage();
+        } else {
+            System.out.println("currently in login page");
+        }
     }
 
     @When("^I Login as \"([^\"]*)\" with Password \"([^\"]*)\"$")
-    public void login(String user, String password) {
-        containerPage =  loginPage.typeUserName(user)
-                    .typeUserPassword(password)
-                    .clickLoginButtonSuccessful();
+    public void loginSuccessful(String userEmail, String password) {
+        containerPage =  loginPage.typeUserName(userEmail)
+                .typeUserPassword(password)
+                .clickLoginButtonSuccessful();
     }
-
 
     @Then("^I should login to$")
     public void I_should_login_to() throws Throwable {

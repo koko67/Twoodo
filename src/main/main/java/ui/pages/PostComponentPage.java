@@ -25,7 +25,7 @@ public class PostComponentPage extends BasePageObject{
 
     WebElement postTextArea;
 
-    @FindBy(xpath = "//button[@type='submit']/span[contains(text(), 'Send')]")
+    @FindBy(xpath = "//div[@id='main-cb']//form/div[@class='right']//div[@class='btns-wrapper']/ul[@class='btns']/li/button")
     WebElement sendButton;
 
     @FindBy(xpath = "//div[@class='btn-group']/a[@title='Make it a task' and contains(text(), 'Task')]")

@@ -48,7 +48,8 @@ public class SearchSteps {
 
     @Then("^a result with the text entered should be displayed in the search content$")
     public void the_result_should_display_a_result_of_that_word_searched() throws Throwable {
-        boolean existPost = containerPage.existsPost(textToSearch);
+        boolean existPost = containerPage.getPostsPanelPage()
+                .existsPost(textToSearch);
         Assert.assertTrue(existPost);
     }
 

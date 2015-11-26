@@ -21,9 +21,9 @@ public class CompanyPanel extends BasePageObject{
         return this;
     }
 
-    public ManageMembersPage clickManageMembers(){
+    public AccountMembersPage clickManageMembers(){
         buttonManageMembers.click();
-        return new ManageMembersPage();
+        return new AccountMembersPage();
     }
 
     @Override

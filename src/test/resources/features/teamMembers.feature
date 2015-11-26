@@ -4,10 +4,8 @@ Feature: Team Members
   This is the test about left teams
 
 Background:
-  Given I navigate to Login Page
-    And I Login as "jorgetop14@gmail.com" with Password "Control123"
+  Given I am logged on the page with user "jorgetop14@gmail.com" and Password "Control123"
     And a team Created called "TheTeam"
-
 
 Scenario: left current team company
   Given I enter to a Team created called "TheTeam"

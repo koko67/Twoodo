@@ -4,8 +4,7 @@ Feature: Searching
   this file test contains all scenarios related with search something in a company
 
 Background:
-  Given I navigate to Login Page
-  And I Login as "jorgetop14@gmail.com" with Password "Control123"
+  Given I am logged on the page with user "jorge.avila@fundacion-jala.org" and Password "Control123"
   And I posted "yellowSubmarine"
 
 Scenario: make a search of something that was posted or sent in a company
