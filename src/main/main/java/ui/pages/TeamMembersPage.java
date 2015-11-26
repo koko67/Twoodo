@@ -19,7 +19,7 @@ public class TeamMembersPage extends BasePageObject{
     @FindBy(xpath = "//div[@id='team-members']/form//button[contains(text(), 'Invite')]")
     WebElement inviteButton;
 
-    @FindBy(xpath = "//div[@id='team-members']/form//button/contains(text(), 'Invite')]")
+    @FindBy(xpath = "//div[@id='postFocus']/div[@class='extruder-toggler']/i[contains(text(),'')]")
     WebElement closeButton;
 
     @FindBy(xpath = "//div[@class='sa-button-container']/*[contains(text(), 'Yes, do it')]")

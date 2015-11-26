@@ -10,22 +10,26 @@ Given I am logged on the page with user "jorgetop14@gmail.com" and Password "Con
 
 
 Scenario: assign a TODO to a teammate
-Given I type the name of a member called "@javila "
-And I type the TODO tag "#todo " with value "first task"
+Given I type the name of a member called "@javila"
+    And I click in the task button
+    And I select the Add a todo button
+    And I type a task name "first task"
 When I click in the button Add task
 Then the new task should be added in the posts section
-#    And a notification counter should be displayed in the team on the teams panel for the member who has assigned the TODO
+When I logout in the application
+    And I Login as "jorge.avila@fundacion-jala.org" with Password "Control123"
+#Then a notification counter should be displayed in the team on the teams panel for the member who has assigned the TODO
 #    And clicking over that team the TODO should be displayed as a post in the posts in the right section
 #
 #
-#@Test
-#Scenario Voting increments the counter
-#Given I post a voting question called "my question?"
-#    And I vote for the yes option
-#When another team member "jorge.avila@fundacion-jala.org" with password "Control123" does login
-#    And votes also for the yes option
-#Then the counter for that answer option in the voting should increments to 2
-#    And the two team members who voted the yes option appears in the vote
+
+Scenario: Voting increments the counter
+Given I post a voting question called "my question?"
+    And I vote for the yes option
+When another team member "jorge.avila@fundacion-jala.org" with password "Control123" does login
+    And votes also for the yes option
+Then the counter for that answer option in the voting should increments to 2
+    And the two team members who voted the yes option appears in the vote
 #
 #
 #@Test

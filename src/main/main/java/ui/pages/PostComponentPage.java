@@ -2,14 +2,10 @@ package ui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.ClickAction;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.BasePageObject;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by jorgeavila on 11/16/2015.
@@ -26,16 +22,19 @@ public class PostComponentPage extends BasePageObject{
     WebElement postTextArea;
 
     @FindBy(xpath = "//div[@id='main-cb']//form/div[@class='right']//div[@class='btns-wrapper']/ul[@class='btns']/li/button")
-    WebElement sendButton;
+    WebElement buttonSend;
 
-    @FindBy(xpath = "//div[@class='btn-group']/a[@title='Make it a task' and contains(text(), 'Task')]")
-    WebElement taskButton;
+    @FindBy(xpath = "//div[@id='main-cb']//form/div[@class='right']//div[@class='btns-wrapper']/ul[@class='btns']/li/div/*[contains(text(), 'Task')]")
+    WebElement buttonTask;
 
     @FindBy(id = "main-cb")
     WebElement centerContainer;
 
     @FindBy(xpath = "//div[@id='main-container']//div[@class='CodeMirror cm-s-default CodeMirror-wrap']")
     WebElement focusDiv;
+
+    @FindBy(xpath = "")
+    WebElement todoButton;
 
     public PostComponentPage(){
         //waitUntilPageObjectIsLoaded();
@@ -49,6 +48,7 @@ public class PostComponentPage extends BasePageObject{
 
 //        Thread.sleep(5000);
         actions.moveToElement(driver.findElement(By.xpath("/html/body/div[2]/div[1]/div/command-box/form/div[2]/div[1]/div[4]/div[1]/div/div/div/div[5]/pre")))
+//        actions.moveToElement(postTextArea)
                 .click()
                 .sendKeys(content)
                 .perform();
@@ -61,12 +61,27 @@ public class PostComponentPage extends BasePageObject{
     }
 
     public ContainerPage clickSend(){
-        sendButton.click();
+        buttonSend.click();
         return new ContainerPage();
+    }
+
+    public PostComponentPage clickOnTaskButton(){
+        buttonTask.click();
+        return this;
+    }
+
+    public PostComponentPage clickOnTodoTask(){
+        buttonTask.findElement(By.xpath("//*[contains(text(), 'Add a #todo')]")).click();
+        return this;
     }
 
     @Override
     public void waitUntilPageObjectIsLoaded() {
         wait.until(ExpectedConditions.visibilityOf(centerContainer));
+    }
+
+    public PostComponentPage clickOnVotingTask() {
+        buttonTask.findElement(By.xpath("//*[contains(text(), 'Ask a #question')]")).click();
+        return this;
     }
 }

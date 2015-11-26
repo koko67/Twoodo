@@ -12,12 +12,20 @@ public class PostsPanelPage extends BasePageObject{
     @FindBy(id = "content")
     WebElement postingComponent;
 
-    private static String postContentText = "//div[@class='post']//div[@class='right']/div[@class='content']//span[contains(text(),'text')]";
+    WebElement post;
+
+    private static String postContentText = "//div[@class='post']//div[@class='right']/div[@class='content']//span[contains(text(),'#text#')]";
 
 
     public boolean existsPost(String postTaskName) {
-        boolean existsPost = postingComponent.findElement(By.xpath(postContentText.replace("text", postTaskName))) != null;
+        String postXpath = postContentText.replace("#text#", postTaskName);
+        boolean existsPost = postingComponent.findElement(By.xpath(postXpath)) != null;
         return existsPost;
+    }
+
+    public PostsPanelPage getPostByName(String postName){
+        post = postingComponent.findElement(By.xpath("//div[@id='content']//span[contains(text(), '" + postName + "')]/ancestor::div[@class='right']"));
+        return this;
     }
 
     @Override
