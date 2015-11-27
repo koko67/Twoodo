@@ -27,6 +27,7 @@ public class RunCukesTest  extends AbstractTestNGCucumberTests {
         try {
             if(CommonMethods.isAccountLogged()){
 //                CommonMethods.logout();
+                BrowserManager.getInstance().getDriver().quit();
             }
             BrowserManager.getInstance().getDriver().quit();
         } catch (Exception e) {

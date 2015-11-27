@@ -14,7 +14,7 @@ public class PostsPanelPage extends BasePageObject{
 
     WebElement post;
 
-    private static String postContentText = "//div[@class='post']//div[@class='right']/div[@class='content']//span[contains(text(),'#text#')]";
+    private static String postContentText = "//div[@id='content']//div[@class='post' or @class='post open'][.//span[contains(text(),'#text#')]]";
 
 
     public boolean existsPost(String postTaskName) {

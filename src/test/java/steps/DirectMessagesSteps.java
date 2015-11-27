@@ -30,7 +30,7 @@ public class DirectMessagesSteps {
         containerPage = new ContainerPage();
     }
 
-    @Given("^a team Created called \"([^\"]*)\"$")
+    @Given("^a have a team \"([^\"]*)\" created$")
     public void a_team_Created_called(String name) throws Throwable {
         containerPage.getLeftTeamsPanel()
                 .clickCreateNewTeam()
@@ -46,7 +46,7 @@ public class DirectMessagesSteps {
     }
 
 
-    @Given("^I enter to a Team created called \"([^\"]*)\"$")
+    @Given("^I go to the Team created \"([^\"]*)\"$")
     public void I_enter_to_a_Team_created(String name) throws Throwable {
         teamName = name;
         containerPage.getLeftTeamsPanel()
@@ -77,7 +77,7 @@ public class DirectMessagesSteps {
                 .typeUserPassword("Control123")
                 .clickLoginButtonSuccessful()
                 .getLeftMembersPanel()
-                .existsNotification();
+                .existsNotificationFromAMember("@jorge");
         Assert.assertTrue(existsNotification);
     }
 

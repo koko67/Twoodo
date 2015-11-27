@@ -1,6 +1,7 @@
 package ui.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -11,10 +12,15 @@ import java.util.concurrent.TimeUnit;
  */
 public class LeftMembersPanel extends LeftPanelPage {
 
+    public final static String ADD_TEAMMATE = "Add a teammate";
+
     @FindBy(xpath = "//div[@class='section']/a[@class='title' and contains(text(),'Direct messages')]/..")
     WebElement membersPanel;
 
-    public final static String ADD_TEAMMATE = "Add a teammate";
+    private static String memberXpath = "//menu-left[@id='menu-left-content']//a[contains(text(), 'Teams')]/following-sibling::a[.//span[contains(text(),'#member#')]]";
+
+    WebElement member;
+
 
     public AccountMembersPage clickCreateNewMemberInTheCompany() throws InterruptedException {
         Thread.sleep(2000);
@@ -28,7 +34,27 @@ public class LeftMembersPanel extends LeftPanelPage {
         return new ContainerPage();
     }
 
-    public boolean existsNotification() {
-        return membersPanel.findElement(By.xpath("//a/span[contains(text(), '1')]")) != null;
+    public ContainerPage clickSelectATeam(String teamName){
+        member = getMemberWebElementByName(teamName);
+        member.click();
+        return new ContainerPage();
+    }
+
+    public boolean existsNotificationFromAMember(String teamName){
+        member = getMemberWebElementByName(teamName);
+        return member.getText() != "" || member.getText() != null;
+    }
+
+    private String constructXpath(String name){
+        String teamXpathText = memberXpath.replace("#member#", name);
+        return teamXpathText;
+    }
+
+    private WebElement getMemberWebElementByName(String teamName){
+        try {
+            return membersPanel.findElement(By.xpath(constructXpath(teamName)));
+        } catch(NoSuchElementException e){
+            return null;
+        }
     }
 }

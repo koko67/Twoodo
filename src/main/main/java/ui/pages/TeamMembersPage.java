@@ -63,8 +63,13 @@ public class TeamMembersPage extends BasePageObject{
     }
 
     public boolean existMemberInTable(String membername) throws InterruptedException {
-        Thread.sleep(3000);
-        return tableMembers.findElement(By.xpath("//span[contains(text(), '" + membername +"')]/../../../td//button/i")) == null;
+        Thread.sleep(1500);
+        try {
+            return tableMembers.findElement(By.xpath("//span[contains(text(), '" + membername + "')]")) != null;
+        } catch (Exception e){
+            return false;
+        }
+
     }
 
     @Override
