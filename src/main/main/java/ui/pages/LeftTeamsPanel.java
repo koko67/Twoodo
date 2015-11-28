@@ -5,11 +5,12 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import ui.BasePageObject;
 
 /**
  * Created by jorgeavila on 11/16/2015.
  */
-public class LeftTeamsPanel extends LeftPanelPage {
+public class LeftTeamsPanel extends BasePageObject {
 
     public final static String CREATION = "Create a team";
 
@@ -52,5 +53,10 @@ public class LeftTeamsPanel extends LeftPanelPage {
         } catch(NoSuchElementException e){
             return null;
         }
+    }
+
+    @Override
+    public void waitUntilPageObjectIsLoaded() {
+
     }
 }

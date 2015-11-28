@@ -4,40 +4,36 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import ui.BasePageObject;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by jorgeavila on 11/16/2015.
  */
-public class LeftMembersPanel extends LeftPanelPage {
+public class LeftMembersPanel extends BasePageObject {
 
     public final static String ADD_TEAMMATE = "Add a teammate";
 
     @FindBy(xpath = "//div[@class='section']/a[@class='title' and contains(text(),'Direct messages')]/..")
     WebElement membersPanel;
 
+    @FindBy(xpath = "//menu-left[@id='menu-left-content']//div/a[contains(text(), 'Add a teammate')]")
+    WebElement buttonAddTeamMate;
+
     private static String memberXpath = "//menu-left[@id='menu-left-content']//a[contains(text(), 'Teams')]/following-sibling::a[.//span[contains(text(),'#member#')]]";
 
     WebElement member;
 
-
-    public AccountMembersPage clickCreateNewMemberInTheCompany() throws InterruptedException {
-        Thread.sleep(2000);
-        clickElementForCreationByText(ADD_TEAMMATE);
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        return new AccountMembersPage();
-    }
-
     public ContainerPage clickSelectAMember(String teamName){
-        clickElementForSelectionByText(teamName);
-        return new ContainerPage();
-    }
-
-    public ContainerPage clickSelectATeam(String teamName){
         member = getMemberWebElementByName(teamName);
         member.click();
         return new ContainerPage();
+    }
+
+    public AccountMembersPage clickCreateNewMemberInTheCompany(){
+        buttonAddTeamMate.click();
+        return new AccountMembersPage();
     }
 
     public boolean existsNotificationFromAMember(String teamName){
@@ -56,5 +52,10 @@ public class LeftMembersPanel extends LeftPanelPage {
         } catch(NoSuchElementException e){
             return null;
         }
+    }
+
+    @Override
+    public void waitUntilPageObjectIsLoaded() {
+
     }
 }

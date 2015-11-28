@@ -10,8 +10,7 @@ import ui.BasePageObject;
  */
 public class ContainerPage extends BasePageObject{
 
-    LeftTeamsPanel leftTeamsPanel;
-    LeftMembersPanel leftMembersPanel;
+    LeftPanelPage leftPanelPage;
     PostComponentPage postComponentPage;
     PostsPanelPage postsPanelPage;
 
@@ -34,22 +33,17 @@ public class ContainerPage extends BasePageObject{
     WebElement buttonLogout;
 
     public ContainerPage(){
-        leftTeamsPanel = new LeftTeamsPanel();
-        leftMembersPanel = new LeftMembersPanel();
+        leftPanelPage = new LeftPanelPage();
         postComponentPage = new PostComponentPage();
         postsPanelPage = new PostsPanelPage();
     }
 
-    public LeftTeamsPanel getLeftTeamsPanel() {
-        return leftTeamsPanel;
+    public LeftPanelPage getLeftPanelPage() {
+        return leftPanelPage;
     }
 
     public PostComponentPage getPostComponentPage() {
         return postComponentPage;
-    }
-
-    public LeftMembersPanel getLeftMembersPanel() {
-        return leftMembersPanel;
     }
 
     public PostsPanelPage getPostsPanelPage() {
@@ -85,13 +79,6 @@ public class ContainerPage extends BasePageObject{
         return userProfile.getAttribute("alt").equals("username");
     }
 
-
-
-    @Override
-    public void waitUntilPageObjectIsLoaded() {
-
-    }
-
     public boolean isTheTeamCalledSo(String teamName) throws InterruptedException {
         Thread.sleep(5000);
         System.out.println("####" + dropdownTeam.getText());
@@ -103,5 +90,10 @@ public class ContainerPage extends BasePageObject{
         String message = driver.findElement(By.xpath("//ul[@id='noty_bottomCenter_layout_container']//div[@class='noty_message']/span[@class='noty_text']")).getText();
         System.out.println(message);
         return message != null;
+    }
+
+    @Override
+    public void waitUntilPageObjectIsLoaded() {
+
     }
 }

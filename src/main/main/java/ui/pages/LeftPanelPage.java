@@ -11,38 +11,64 @@ import ui.BasePageObject;
  */
 public class LeftPanelPage extends BasePageObject {
 
-    @FindBy(xpath = "")
-    WebElement leftContainer;
+    @FindBy(xpath = "//div[@id='company-logo']/div[@class='dropdown' or @class='dropdown open']/button/img")
+    WebElement dropDownCompany;
 
-    protected WebElement leftPanelComponent;
+    @FindBy(xpath = "//div[@id='company-logo']//a[contains(text(), 'Company settings')]")
+    WebElement buttonCompanySettings;
 
-    CompanyPanel companyPanel;
-    WebElement notification;
+    @FindBy(xpath = "//div[@id='company-logo']//a[contains(text(), 'Manage teams')]")
+    WebElement buttonManageCompanyTeams;
 
-    public LeftPanelPage (){
+    @FindBy(xpath = "//div[@id='company-logo']//a[contains(text(), 'Manage members')]")
+    WebElement buttonManageCompanyMembers;
 
+    @FindBy(xpath = "//form[@id='main-search']/input[@id='inputMainSearch']")
+    protected WebElement inputSearch;
+
+    @FindBy(xpath = "//form[@id='main-search']/button[@type='submit']/i")
+    protected WebElement buttonSearch;
+
+    private LeftIntegrationPanel leftIntegrationPanel;
+    private LeftTeamsPanel leftTeamsPanel;
+    private LeftMembersPanel leftMembersPanel;
+
+    public LeftPanelPage(){
+        leftIntegrationPanel = new LeftIntegrationPanel();
+        leftTeamsPanel = new LeftTeamsPanel();
+        leftMembersPanel = new LeftMembersPanel();
     }
 
-    public void clickElementForCreationByText(String text){
-        leftPanelComponent = driver.findElement(By.xpath("//menu-left[@id='menu-left-content']//div/a[contains(text(), '" + text + "')]"));
-        leftPanelComponent.click();
+    public LeftPanelPage clickOnDropdownCompany(){
+        dropDownCompany.click();
+        return this;
     }
 
-    public void clickElementForSelectionByText(String text){
-        leftPanelComponent = driver.findElement(By.xpath("//menu-left[@id='menu-left-content']//div/a/span[contains(text(), '" + text + "')]"));
-        leftPanelComponent.click();
+    public AccountMembersPage clickOnButtonCompanyMembers(){
+        buttonManageCompanyMembers.click();
+        return new AccountMembersPage();
     }
 
-    public WebElement findNotificationIcon(){
-        return notification = driver.findElement(By.xpath("//div[@class='section']/a/span[contains(text(), '1')]"));
+    public LeftPanelPage setTextToSearch(String textSearch){
+        inputSearch.sendKeys(textSearch);
+        return this;
+    }
+
+    public ContainerPage clickSearch(){
+        buttonSearch.click();
+        return new ContainerPage();
+    }
+
+    public LeftTeamsPanel getLeftTeamsPanel() {
+        return leftTeamsPanel;
+    }
+
+    public LeftMembersPanel getLeftMembersPanel() {
+        return leftMembersPanel;
     }
 
     @Override
     public void waitUntilPageObjectIsLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(leftPanelComponent));
-    }
 
-    public CompanyPanel getCompanyPanel() {
-        return companyPanel;
     }
 }

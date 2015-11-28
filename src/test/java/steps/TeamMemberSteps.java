@@ -76,8 +76,8 @@ public class TeamMemberSteps {
                 .clickButtonTeamMembers();
     }
 
-    @And("^I remove the member \"([^\"]*)\"$")
-    public void I_remove_the_member(String membername) throws Throwable {
+    @And("^I remove the member \"([^\"]*)\" from the team$")
+    public void I_remove_the_member_from_the_team(String membername) throws Throwable {
         memberToRemove = membername;
         teamMembersPage.clickRemoveMemberByName(membername);
     }
@@ -100,7 +100,16 @@ public class TeamMemberSteps {
     }
 
     @After("@Team-2")
-    public void tearDown2(){
-        containerPage.clickUserButton().clickUserButton();
+    public void tearDown2() throws Throwable{
+        containerPage.getLeftPanelPage()
+                .clickOnDropdownCompany()
+                .clickOnButtonCompanyMembers()
+                .clickRemoveMemberByName(memberToRemove)
+                .confirmRemoveMember()
+                .closeAccountMembersDialog()
+                .clickDropDownTeam()
+                .clickButtonTeamSettings()
+                .clickLinkDeleteTeam()
+                .confirmDeletingTeam();
     }
 }

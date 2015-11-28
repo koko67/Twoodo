@@ -89,7 +89,8 @@ public class PostSteps {
 
     @Then("^a notification counter should be displayed in the team$")
     public void a_notification_counter_should_be_displayed_in_the_team() throws Throwable {
-        boolean existNotification = containerPage.getLeftTeamsPanel()
+        boolean existNotification = containerPage.getLeftPanelPage()
+                .getLeftTeamsPanel()
                 .existsNotificationInATeam("@TheTeam");
         Assert.assertTrue(existNotification);
     }

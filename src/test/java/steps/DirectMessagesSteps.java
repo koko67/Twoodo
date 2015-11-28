@@ -32,7 +32,8 @@ public class DirectMessagesSteps {
 
     @Given("^a have a team \"([^\"]*)\" created$")
     public void a_team_Created_called(String name) throws Throwable {
-        containerPage.getLeftTeamsPanel()
+        containerPage.getLeftPanelPage()
+                .getLeftTeamsPanel()
                 .clickCreateNewTeam()
                 .createTeam(name);
     }
@@ -40,7 +41,8 @@ public class DirectMessagesSteps {
     @And("^the Team has a member that is  \"([^\"]*)\"$")
     public void the_Team_has_a_member_called(String name) throws Throwable {
         memberName = name;
-        containerPage.getLeftMembersPanel()
+        containerPage.getLeftPanelPage()
+                .getLeftMembersPanel()
                 .clickCreateNewMemberInTheCompany()
                 .addNewMemberShip(name);
     }
@@ -49,14 +51,16 @@ public class DirectMessagesSteps {
     @Given("^I go to the Team created \"([^\"]*)\"$")
     public void I_enter_to_a_Team_created(String name) throws Throwable {
         teamName = name;
-        containerPage.getLeftTeamsPanel()
+        containerPage.getLeftPanelPage()
+                .getLeftTeamsPanel()
                 .clickSelectATeam(teamName);
     }
 
     @And("^I select the member of that team that is \"([^\"]*)\"$")
     public void I_select_a_member_of_that_team(String member) throws Throwable {
         memberName = member;
-        containerPage.getLeftMembersPanel()
+        containerPage.getLeftPanelPage()
+                .getLeftMembersPanel()
                 .clickSelectAMember(memberName);
     }
 
@@ -76,7 +80,9 @@ public class DirectMessagesSteps {
                 .typeUserName("jorge.avila@fundacion-jala.org")
                 .typeUserPassword("Control123")
                 .clickLoginButtonSuccessful()
+                .getLeftPanelPage()
                 .getLeftMembersPanel()
+
                 .existsNotificationFromAMember("@jorge");
         Assert.assertTrue(existsNotification);
     }
