@@ -5,7 +5,7 @@ Feature: Team Members
 
 Background:
   Given I am logged on the page with user "jorgetop14@gmail.com" and Password "Control123"
-    And a have a team "TheTeam" created
+    And I have a team "TheTeam" created
 
 @Team-1
 Scenario: Delete a team for redirecting to the default team company

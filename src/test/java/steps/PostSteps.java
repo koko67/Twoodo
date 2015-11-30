@@ -40,29 +40,34 @@ public class PostSteps {
 
     @And("^I click in the task button in the post section$")
     public void I_click_in_the_task_button() throws Throwable {
-        postComponentPage.clickOnTaskButton();
+        containerPage.getPostComponentPage()
+                .clickOnTaskButton();
     }
 
     @And("^I select the 'Add a #todo' button$")
     public void I_select_the_Add_a_todo_button() throws Throwable {
-        postComponentPage.clickOnTodoTask();
+        containerPage.getPostComponentPage()
+                .clickOnTodoTask();
     }
 
     @And("^I type a task name \"([^\"]*)\"$")
     public void I_type_a_task_name(String taskName) throws Throwable {
         postTaskName = taskName;
-        postComponentPage.typeTextArea(taskName);
+        containerPage.getPostComponentPage()
+                .typeTextArea(taskName);
     }
 
     @When("^I perform the post$")
     public void I_click_in_the_button_Add_task() throws Throwable {
-        postComponentPage.clickSend();
+        containerPage.getPostComponentPage()
+                .clickSend();
     }
 
     @Then("^the new task should be added in the posts section$")
     public void the_new_task_should_be_added_in_the_posts_section() throws Throwable {
         postsPanelPage = containerPage.getPostsPanelPage();
-        postsPanelPage.existsPost(postTaskName);
+        containerPage.getPostsPanelPage()
+                .existsPost(postTaskName);
     }
 
     @When("^I logout from the application$")
@@ -122,17 +127,58 @@ public class PostSteps {
         Assert.assertEquals(counter, count);
     }
 
+    @And("^close the voting$")
+    public void close_the_voting() throws Throwable {
+        containerPage.getPostsPanelPage()
+                .getPostByName(postTaskName)
+                .closePostVoting();
+    }
+
+    @Then("^the voting is disabled for all users$")
+    public void the_voting_is_disabled_for_all_users() throws Throwable {
+        boolean isClosed = containerPage.getPostsPanelPage()
+                .isPostVotingClosed();
+        Assert.assertTrue(isClosed);
+    }
+
+    @When("^I finish this task with a check$")
+    public void I_finish_this_task_with_a_check() throws Throwable {
+        containerPage.getPostsPanelPage()
+                .getPostByName(postTaskName)
+                .checkTodo();
+    }
+
     @After("@votingCounter")
-    public void tearDownVoting(){
+    public void tearDownVoting() throws Throwable {
         containerPage.getLeftPanelPage()
                 .clickOnDropdownCompany()
-                .clickOnButtonCompanyMembers()
-                .clickRemoveMemberByName(memberToRemove)
-                .confirmRemoveMember()
-                .closeAccountMembersDialog()
-                .clickDropDownTeam()
-                .clickButtonTeamSettings()
-                .clickLinkDeleteTeam()
-                .confirmDeletingTeam();
+                .clickOnButtonCompanyTeams()
+                .clickOnRemoveTeamByName(DirectMessagesSteps.teamName)
+                .confirmRemoveTeam();
+    }
+
+    @And("^I navigate to Tasks section$")
+    public void I_navigate_to_Tasks_section() throws Throwable {
+        containerPage.getLeftPanelPage()
+                .getLeftIntegrationPanel()
+                .clickOnButtonTasks();
+    }
+
+    @And("^I select the 'My completed tasks' option$")
+    public void I_select_the_My_completed_tasks_option() throws Throwable {
+        containerPage.getPostsPanelPage()
+                .clickOnSelectCompletedTasks();
+    }
+
+    @Then("^the Completed task should appears in the panel of tasks$")
+    public void the_Completed_task_should_appears_in_the_panel_of_tasks() throws Throwable {
+        containerPage.getPostsPanelPage()
+                .existsPost(postTaskName);
+    }
+
+    @And("^the task completed should be crossed out$")
+    public void the_task_completed_should_be_crossed_out() throws Throwable {
+        boolean isCrossed = containerPage.getPostsPanelPage()
+                .todoIsCrossedOut(postTaskName);
     }
 }

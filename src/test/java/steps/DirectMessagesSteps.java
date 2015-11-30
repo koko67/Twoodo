@@ -20,8 +20,8 @@ public class DirectMessagesSteps {
 
     ContainerPage containerPage;
 
-    private String teamName;
-    private String memberName;
+    public static String teamName;
+    public static String memberName;
     private String messageToDeliver;
     private String currentCompany;
 

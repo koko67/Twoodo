@@ -50,6 +50,11 @@ public class LeftPanelPage extends BasePageObject {
         return new AccountMembersPage();
     }
 
+    public AccountsTeamsPage clickOnButtonCompanyTeams(){
+        buttonManageCompanyTeams.click();
+        return new AccountsTeamsPage();
+    }
+
     public LeftPanelPage setTextToSearch(String textSearch){
         inputSearch.sendKeys(textSearch);
         return this;

@@ -23,35 +23,40 @@ Given I am logged on the page with user "jorgetop14@gmail.com" and Password "Con
 #When I go to the Team created "TheTeam"
 #Then the new task should be added in the posts section
 
-@votingCounter
-Scenario: Voting increments the counter
-Given I post a voting question called "my question?"
-    And vote for the "Yes" option
-When I logout from the application
-    And another team member "jorge.avila@fundacion-jala.org" with password "Control123" does login
-    And I go to the company "Jala"
-    And I go to the Team created "TheTeam"
-    And vote for the "Yes" option
-Then the counter for that answer option in the voting should increments to "2"
-#    And the two team members who voted the yes option appears in the vote
+#@votingCounter
+#Scenario: Voting increments the counter
+#Given I post a voting question called "my question?"
+#    And vote for the "Yes" option
+#When I logout from the application
+#    And another team member "jorge.avila@fundacion-jala.org" with password "Control123" does login
+#    And I go to the company "Jala"
+#    And I go to the Team created "TheTeam"
+#    And vote for the "Yes" option
+#Then the counter for that answer option in the voting should increments to "2"
 #
 #
-#@Test
+#@closeVoting
 #Scenario Voting has been closed
-#Given I Posted a voting question called "voting question"
-#    And I vote for the no option
-#When another team member "jorge,avila@fundacion-jala.org" with password do login
-#    And votes for the yes option
+#Given I post a voting question called "voting question"
+#    And vote for the "No" option
+#When I logout from the application
+#    And another team member "jorge.avila@fundacion-jala.org" with password "Control123" does login
+#    And I go to the company "Jala"
+#    And I go to the Team created "TheTeam"
+#    And vote for the "Yes" option
 #    And close the voting
 #Then the voting is disabled for all users
-#    And no one can continue voting
-#
-#
-#Scenario Assign Tasks to myself and complete it
-#Given I Create a Team called "Test"
-#    And I add a todo task to myself
-#When I finish this task with a check
-#    And I go to the tasks section
-#    And I select the "My completed tasks" option
-#Then the Completed task should appears in the panel of tasks
-#    And the task completed should be crossed out
+
+
+@taskToMyself
+Scenario: Assign Tasks to myself and complete it
+Given I go to the Team created "TheTeam"
+    And I click in the task button in the post section
+    And I select the 'Add a #todo' button
+    And I type a task name "MyTodo"
+    And I click in the ask question button
+When I finish this task with a check
+    And I navigate to Tasks section
+    And I select the 'My completed tasks' option
+Then the Completed task should appears in the panel of tasks
+    And the task completed should be crossed out

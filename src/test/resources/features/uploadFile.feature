@@ -5,7 +5,7 @@ Feature: Upload files
 
 Background:
 Given I am logged on the page with user "jorgetop14@gmail.com" and Password "Control123"
-  And a have a team "TheTeam" created
+  And I have a team "TheTeam" created
 
 @uploadImage
 Scenario: upload an image as a post in a voting
