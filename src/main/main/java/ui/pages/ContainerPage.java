@@ -55,7 +55,8 @@ public class ContainerPage extends BasePageObject{
         return this;
     }
 
-    public ContainerPage clickDropDownTeam(){
+    public ContainerPage clickDropDownTeam() throws InterruptedException {
+        Thread.sleep(500);
         dropdownTeam.click();
         return this;
     }
@@ -95,5 +96,14 @@ public class ContainerPage extends BasePageObject{
     @Override
     public void waitUntilPageObjectIsLoaded() {
 
+    }
+
+    public ContainerPage goToComapny(String companyName) {
+        if(!dropdownTeam.getText().equalsIgnoreCase(companyName)){
+            leftPanelPage.clickOnDropdownCompany()
+                    .selectACompanyByName(companyName);
+            return this;
+        }
+        return this;
     }
 }

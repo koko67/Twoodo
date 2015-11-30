@@ -27,7 +27,7 @@ public class TeamMemberSteps {
     }
 
     @And("^I go to the team settings$")
-    public void I_go_to_the_team_settings(){
+    public void I_go_to_the_team_settings() throws  Throwable{
         teamGeneralPage = containerPage.clickDropDownTeam()
                 .clickButtonTeamSettings();
     }

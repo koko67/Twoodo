@@ -1,6 +1,7 @@
 package steps;
 
 import cucumber.api.PendingException;
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -8,6 +9,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import junit.framework.Assert;
 import ui.pages.ContainerPage;
+import ui.pages.LoginPage;
 import ui.pages.PostComponentPage;
 import ui.pages.PostsPanelPage;
 
@@ -19,6 +21,7 @@ public class PostSteps {
     ContainerPage containerPage;
     PostComponentPage postComponentPage;
     PostsPanelPage postsPanelPage;
+    LoginPage loginPage;
 
     private String postTaskName;
 
@@ -64,7 +67,7 @@ public class PostSteps {
 
     @When("^I logout from the application$")
     public void I_logout_in_the_application() throws Throwable {
-        containerPage.clickUserButton()
+        loginPage = containerPage.clickUserButton()
                 .logout();
     }
 
@@ -76,15 +79,19 @@ public class PostSteps {
 
     @Given("^I post a voting question called \"([^\"]*)\"$")
     public void I_post_a_voting_question_called(String question) throws Throwable {
-        postComponentPage.clickOnTaskButton()
+        postTaskName = question;
+        containerPage.getPostComponentPage()
+                .clickOnTaskButton()
                 .clickOnVotingTask()
                 .typeTextArea(question)
                 .clickSend();
     }
 
-    @And("^I vote for the yes option$")
-    public void I_vote_for_the_yes_option() throws Throwable {
-        postsPanelPage.getPostByName("");
+    @And("^vote for the \"([^\"]*)\" option$")
+    public void vote_for_the_yes_option(String option) throws Throwable {
+        containerPage.getPostsPanelPage()
+                .getPostByName(postTaskName)
+                .voteFor(option);
     }
 
     @Then("^a notification counter should be displayed in the team$")
@@ -96,8 +103,36 @@ public class PostSteps {
     }
 
     @And("^I go to the company \"([^\"]*)\"$")
-    public void I_go_to_the_company(String arg1) throws Throwable {
-        // Express the Regexp above with the code you wish you had
-        throw new PendingException();
+    public void I_go_to_the_company(String companyName) throws Throwable {
+        containerPage.goToComapny(companyName);
+    }
+
+    @And("^another team member \"([^\"]*)\" with password \"([^\"]*)\" does login$")
+    public void another_team_member_with_password_does_login(String arg1, String arg2) throws Throwable {
+        loginPage.typeUserName(arg1)
+                .typeUserPassword(arg2)
+                .clickLoginButtonSuccessful();
+    }
+
+    @Then("^the counter for that answer option in the voting should increments to \"([^\"]*)\"$")
+    public void the_counter_for_that_answer_option_in_the_voting_should_increments_to(String count) throws Throwable {
+        String counter = containerPage.getPostsPanelPage()
+                .getResultByOption("Yes");
+
+        Assert.assertEquals(counter, count);
+    }
+
+    @After("@votingCounter")
+    public void tearDownVoting(){
+        containerPage.getLeftPanelPage()
+                .clickOnDropdownCompany()
+                .clickOnButtonCompanyMembers()
+                .clickRemoveMemberByName(memberToRemove)
+                .confirmRemoveMember()
+                .closeAccountMembersDialog()
+                .clickDropDownTeam()
+                .clickButtonTeamSettings()
+                .clickLinkDeleteTeam()
+                .confirmDeletingTeam();
     }
 }

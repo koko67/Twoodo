@@ -1,6 +1,7 @@
 package ui.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -57,6 +58,20 @@ public class LeftPanelPage extends BasePageObject {
     public ContainerPage clickSearch(){
         buttonSearch.click();
         return new ContainerPage();
+    }
+
+    public ContainerPage selectACompanyByName(String companyName){
+        try {
+            dropDownCompany.findElement(By.xpath("../following-sibling::ul//span[contains(text(), '" + companyName + "')]")).click();
+            return new ContainerPage();
+        } catch (NoSuchElementException e) {
+            System.out.println("element was not found...." + e.getMessage());
+            return null;
+        }
+    }
+
+    public LeftIntegrationPanel getLeftIntegrationPanel() {
+        return leftIntegrationPanel;
     }
 
     public LeftTeamsPanel getLeftTeamsPanel() {

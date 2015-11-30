@@ -16,18 +16,17 @@ import ui.pages.SearchPage;
 public class SearchSteps {
 
     private ContainerPage containerPage;
-    private SearchPage searchPage;
 
     private String textToSearch;
 
     @Before
     public void setUp(){
         containerPage = new ContainerPage();
-        textToSearch = "yellowSubmarine";
     }
 
     @And("^I posted \"([^\"]*)\"$")
     public void I_posted(String post) throws Throwable {
+        textToSearch = post;
         containerPage.getPostComponentPage()
                 .typeTextArea(post)
                 .clickSend();
@@ -36,13 +35,14 @@ public class SearchSteps {
     @Given("^I enter a text to search that is \"([^\"]*)\"$")
     public void I_make_a_post_called(String textSearch) throws Throwable {
         textToSearch = textSearch;
-        searchPage = new SearchPage();
-        searchPage.setTextToSearch(textToSearch);
+        containerPage.getLeftPanelPage()
+                .setTextToSearch(textToSearch);
     }
 
     @When("^I click in the search button$")
     public void I_perform_a_search_with_that_word_in_the_search_panel() throws Throwable {
-        searchPage.clickSearch();
+        containerPage.getLeftPanelPage()
+                .clickSearch();
     }
 
 

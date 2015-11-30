@@ -30,7 +30,7 @@ public class DirectMessagesSteps {
         containerPage = new ContainerPage();
     }
 
-    @Given("^a have a team \"([^\"]*)\" created$")
+    @Given("^I have a team \"([^\"]*)\" created$")
     public void a_team_Created_called(String name) throws Throwable {
         containerPage.getLeftPanelPage()
                 .getLeftTeamsPanel()
@@ -38,13 +38,14 @@ public class DirectMessagesSteps {
                 .createTeam(name);
     }
 
-    @And("^the Team has a member that is  \"([^\"]*)\"$")
+    @And("^the Team has a member that is \"([^\"]*)\"$")
     public void the_Team_has_a_member_called(String name) throws Throwable {
         memberName = name;
-        containerPage.getLeftPanelPage()
-                .getLeftMembersPanel()
-                .clickCreateNewMemberInTheCompany()
-                .addNewMemberShip(name);
+        containerPage.clickDropDownTeam()
+                .clickButtonTeamMembers()
+                .setNewMember(name)
+                .clickInviteMember()
+                .closeTeamMembersDialog();
     }
 
 

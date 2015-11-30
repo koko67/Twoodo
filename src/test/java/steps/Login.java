@@ -49,7 +49,7 @@ public class Login {
 
     @When("^I Login as \"([^\"]*)\" with Password \"([^\"]*)\"$")
     public void loginSuccessful(String userEmail, String password) {
-        containerPage =  loginPage.typeUserName(userEmail)
+        containerPage = loginPage.typeUserName(userEmail)
                 .typeUserPassword(password)
                 .clickLoginButtonSuccessful();
     }
