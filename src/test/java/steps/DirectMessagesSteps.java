@@ -1,5 +1,6 @@
 package steps;
 
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -94,5 +95,19 @@ public class DirectMessagesSteps {
                 .getPostsPanelPage()
                 .existsPost(messageToDeliver);
         Assert.assertTrue(existsMessage);
+    }
+
+    @After("@directMessage")
+    public void tearDown2() throws Throwable{
+        containerPage.getLeftPanelPage()
+                .clickOnDropdownCompany()
+                .clickOnButtonCompanyMembers()
+                .clickRemoveMemberByName(memberName)
+                .confirmRemoveMember()
+                .closeAccountMembersDialog()
+                .clickDropDownTeam()
+                .clickButtonTeamSettings()
+                .clickLinkDeleteTeam()
+                .confirmDeletingTeam();
     }
 }

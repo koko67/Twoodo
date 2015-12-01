@@ -76,12 +76,6 @@ public class PostSteps {
                 .logout();
     }
 
-
-
-
-
-
-
     @Given("^I post a voting question called \"([^\"]*)\"$")
     public void I_post_a_voting_question_called(String question) throws Throwable {
         postTaskName = question;
@@ -148,14 +142,6 @@ public class PostSteps {
                 .checkTodo();
     }
 
-    @After("@votingCounter")
-    public void tearDownVoting() throws Throwable {
-        containerPage.getLeftPanelPage()
-                .clickOnDropdownCompany()
-                .clickOnButtonCompanyTeams()
-                .clickOnRemoveTeamByName(DirectMessagesSteps.teamName)
-                .confirmRemoveTeam();
-    }
 
     @And("^I navigate to Tasks section$")
     public void I_navigate_to_Tasks_section() throws Throwable {
@@ -172,13 +158,23 @@ public class PostSteps {
 
     @Then("^the Completed task should appears in the panel of tasks$")
     public void the_Completed_task_should_appears_in_the_panel_of_tasks() throws Throwable {
-        containerPage.getPostsPanelPage()
-                .existsPost(postTaskName);
+        boolean exists = containerPage.getPostsPanelPage()
+                .existsCompletedTask(postTaskName);
+        Assert.assertTrue(exists);
     }
 
     @And("^the task completed should be crossed out$")
     public void the_task_completed_should_be_crossed_out() throws Throwable {
         boolean isCrossed = containerPage.getPostsPanelPage()
                 .todoIsCrossedOut(postTaskName);
+    }
+
+    @After("@posts")
+    public void tearDown2() throws Throwable{
+        containerPage.getLeftPanelPage()
+                .clickOnDropdownCompany()
+                .clickOnButtonCompanyTeams()
+                .clickOnRemoveTeamByName(DirectMessagesSteps.teamName)
+                .confirmRemoveTeam();
     }
 }

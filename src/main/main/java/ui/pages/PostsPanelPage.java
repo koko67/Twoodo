@@ -14,14 +14,19 @@ public class PostsPanelPage extends BasePageObject{
     @FindBy(id = "content")
     WebElement postingComponent;
 
-    @FindBy(id = "//div[@id='content']//span[contains(., 'My completed tasks')]")
-    WebElement buttonCompletedTasks;
+//    @FindBy(id = "//div[@id='content']//span[contains(., 'My completed tasks')]")
+//    WebElement buttonCompletedTasks;
 
+
+    private static String postContentText = "//div[@class='post' or @class='post open'][.//span[contains(text(),'#text#')]]";
     WebElement post;
 
-    private static String postContentText = "//div[@id='content']//div[@class='post' or @class='post open'][.//span[contains(text(),'#text#')]]";
 
 
+    public boolean existsCompletedTask(String completedTodoName){
+        boolean existCompletedPost = postingComponent.findElement(By.xpath("//div/div[@class='details']//span[contains(., '" + completedTodoName + "')]")) != null;
+        return existCompletedPost;
+    }
 
     public boolean existsPost(String postTaskName) {
         String postXpath = postContentText.replace("#text#", postTaskName);
@@ -30,9 +35,9 @@ public class PostsPanelPage extends BasePageObject{
     }
 
     public PostsPanelPage getPostByName(String postName) throws InterruptedException {
-        Thread.sleep(3000);
-//        wait.until(ExpectedConditions.visibilityOf(postingComponent.findElement(By.xpath("//div[@id='content']//span[contains(text(), '" + postName + "')]/ancestor::div[@class='right']"))));
-        post = postingComponent.findElement(By.xpath("//div[@id='content']//span[contains(text(), '" + postName + "')]/ancestor::div[@class='right']"));
+        By postBy = By.xpath("//div[@id='content']//span[contains(text(), '" + postName + "')]/ancestor::div[@class='right']");
+        wait.until(ExpectedConditions.presenceOfElementLocated(postBy));
+        post = postingComponent.findElement(By.xpath("//span[contains(text(), '" + postName + "')]/ancestor::div[@class='right']"));
         return this;
     }
 
@@ -74,13 +79,16 @@ public class PostsPanelPage extends BasePageObject{
     }
 
     public PostsPanelPage checkTodo() throws InterruptedException {
-        Thread.sleep(3000);
-        post.findElement(By.xpath("//input[@type='checkbox']")).click();
+        WebElement checkbox = post.findElement(By.xpath("//div[@class='post-content']/div/span/label"));
+        checkbox.click();
         return this;
     }
 
     public PostsPanelPage clickOnSelectCompletedTasks() {
-        wait.until(ExpectedConditions.visibilityOf(buttonCompletedTasks));
+        By completedTasksBy = By.xpath("//div[@id='content']//span[contains(., 'My completed tasks')]");
+        wait.until(ExpectedConditions.presenceOfElementLocated(completedTasksBy));
+//        wait.until(ExpectedConditions.visibilityOf(buttonCompletedTasks));
+        WebElement buttonCompletedTasks = postingComponent.findElement(By.xpath("//div[@id='content']//span[contains(., 'My completed tasks')]"));
         buttonCompletedTasks.click();
         return this;
     }

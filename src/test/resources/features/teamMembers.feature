@@ -1,4 +1,4 @@
-@teams
+@teamsAndMembers
 
 Feature: Team Members
   This is the test about left teams

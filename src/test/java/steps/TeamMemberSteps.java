@@ -94,12 +94,7 @@ public class TeamMemberSteps {
         teamMembersPage.closeTeamMembersDialog();
     }
 
-    @After("@Team-1")
-    public void tearDown1(){
-
-    }
-
-    @After("@Team-2")
+    @After("@teamsAndMembers")
     public void tearDown2() throws Throwable{
         containerPage.getLeftPanelPage()
                 .clickOnDropdownCompany()

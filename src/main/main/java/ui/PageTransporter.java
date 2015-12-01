@@ -10,14 +10,9 @@ import ui.pages.LoginPage;
  */
 public class PageTransporter {
     private WebDriver driver = BrowserManager.getInstance().getDriver();
-    private static String homeUrl;
-    private static String loginUrl;
+    private static String homeUrl = "https://www.twoodo.com/site/feed";
+    private static String loginUrl = "https://www.twoodo.com/login";
     private static PageTransporter instance;
-
-    private PageTransporter(){
-        homeUrl = "https://www.twoodo.com/site/feed";
-        loginUrl = "https://www.twoodo.com/login";
-    }
 
     public static PageTransporter getInstance(){
         if(instance==null){
