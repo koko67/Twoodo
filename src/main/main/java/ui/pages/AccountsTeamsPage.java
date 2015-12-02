@@ -16,6 +16,9 @@ public class AccountsTeamsPage extends BasePageObject{
     @FindBy(xpath = "//div[@class='sa-button-container']/*[contains(text(), 'Yes, do it')]")
     WebElement buttonConfirmDeleting;
 
+    @FindBy(xpath = "//div[@id='postFocus']/div[@class='extruder-toggler']/i[contains(text(),'')]")
+    WebElement closeButton;
+
     public AccountsTeamsPage clickOnRemoveTeamByName(String teamName){
         teamsTable.findElement(By.xpath("//h3[contains(text(), 'TheTeam')]/../following-sibling::td//button[@class='btn btn-danger']")).click();
         return this;
@@ -26,6 +29,11 @@ public class AccountsTeamsPage extends BasePageObject{
         buttonConfirmDeleting = driver.findElement(By.xpath("//div[@class='sa-button-container']//button[contains(text(), 'Yes, do it')]"));
         buttonConfirmDeleting.click();
         return this;
+    }
+
+    public ContainerPage closeAccountTeamsDialog(){
+        closeButton.click();
+        return new ContainerPage();
     }
 
 

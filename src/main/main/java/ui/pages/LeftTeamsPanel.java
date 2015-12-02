@@ -14,7 +14,7 @@ public class LeftTeamsPanel extends BasePageObject {
 
     public final static String CREATION = "Create a team";
 
-    @FindBy(xpath = "//div[@class='section']/a[@class='title' and contains(text(), 'Teams')]")
+    @FindBy(xpath = "//div[@class='section']/a[@class='title' and contains(text(), 'Teams')]/..")
     WebElement teamsContainer;
 
     @FindBy(xpath = "//menu-left[@id='menu-left-content']//div/a[contains(text(), 'Create a team')]")
@@ -22,7 +22,7 @@ public class LeftTeamsPanel extends BasePageObject {
 
     WebElement team;
 
-    private static String teamXpath = "//menu-left[@id='menu-left-content']//a[contains(text(), 'Teams')]/following-sibling::a[.//span[contains(text(),'#team#')]]";
+    private static String teamXpath = "a[.//span[contains(text(),'#team#')]]";
 
     public TeamsCreationPage clickCreateNewTeam(){
 //        wait.until(ExpectedConditions.visibilityOf(teamsContainer));
@@ -39,6 +39,7 @@ public class LeftTeamsPanel extends BasePageObject {
 
     public boolean existsNotificationInATeam(String teamName){
         team = getTeamWebElementByName(teamName);
+        team.findElement(By.xpath("//following-sibling::span[@class='counter']"));
         return team.getText() != "" || team.getText() != null;
     }
 

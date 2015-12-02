@@ -60,7 +60,10 @@ public class PostsPanelPage extends BasePageObject{
         return this;
     }
 
-    public String getResultByOption(String option) {
+    public String getResultByOption(String option) throws InterruptedException {
+        Thread.sleep(5000);
+        By resultBy = By.xpath("//span[contains(text(), '" + option + "')]/preceding-sibling::span/span");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(resultBy));
         return post.findElement(By.xpath("//span[contains(text(), '" + option + "')]/preceding-sibling::span/span")).getText();
     }
 

@@ -97,7 +97,7 @@ public class PostSteps {
     public void a_notification_counter_should_be_displayed_in_the_team() throws Throwable {
         boolean existNotification = containerPage.getLeftPanelPage()
                 .getLeftTeamsPanel()
-                .existsNotificationInATeam("@TheTeam");
+                .existsNotificationInATeam(DirectMessagesSteps.teamName);
         Assert.assertTrue(existNotification);
     }
 
@@ -175,6 +175,7 @@ public class PostSteps {
                 .clickOnDropdownCompany()
                 .clickOnButtonCompanyTeams()
                 .clickOnRemoveTeamByName(DirectMessagesSteps.teamName)
-                .confirmRemoveTeam();
+                .confirmRemoveTeam()
+                .closeAccountTeamsDialog();
     }
 }
