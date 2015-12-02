@@ -77,7 +77,7 @@ public class UploadFileSteps {
         Assert.assertTrue(existPost);
     }
 
-    @After("@uploadImage")
+    @After("@files")
     public void tearDownUploadImage() throws  Throwable{
         containerPage.clickDropDownTeam()
                 .clickButtonTeamSettings()

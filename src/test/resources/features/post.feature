@@ -23,38 +23,37 @@ Then a notification counter should be displayed in the team
 When I go to the Team created "TheTeam"
 Then the new task should be added in the posts section
 
-#@votingCounter
-#Scenario: Voting increments the counter
-#Given I post a voting question called "my question?"
-#    And vote for the "Yes" option
-#When I logout from the application
-#    And another team member "jorge.avila@fundacion-jala.org" with password "Control123" does login
-#    And I go to the company "Jala"
-#    And I go to the Team created "TheTeam"
-#    And vote for the "Yes" option
-#Then the counter for that answer option in the voting should increments to "2"
+
+Scenario: Voting increments the counter
+Given I post a voting question called "my question?"
+    And vote for the "Yes" option
+When I logout from the application
+    And another team member "jorge.avila@fundacion-jala.org" with password "Control123" does login
+    And I go to the company "Jala"
+    And I go to the Team created "TheTeam"
+    And vote for the "Yes" option
+Then the counter for that answer option in the voting should increments to "2"
 
 
-#@closeVoting
-#Scenario: Voting has been closed
-#Given I post a voting question called "voting question"
-#    And vote for the "No" option
-#When I logout from the application
-#    And another team member "jorge.avila@fundacion-jala.org" with password "Control123" does login
-#    And I go to the company "Jala"
-#    And I go to the Team created "TheTeam"
-#    And vote for the "Yes" option
-#    And close the voting
-#Then the voting is disabled for all users
+Scenario: Voting has been closed
+Given I post a voting question called "voting question"
+    And vote for the "No" option
+When I logout from the application
+    And another team member "jorge.avila@fundacion-jala.org" with password "Control123" does login
+    And I go to the company "Jala"
+    And I go to the Team created "TheTeam"
+    And vote for the "Yes" option
+    And close the voting
+Then the voting is disabled for all users
 
 
-#Scenario: Assign Tasks to myself and complete it
-#Given I go to the Team created "TheTeam"
-#    And I click in the task button in the post section
-#    And I select the 'Add a #todo' button
-#    And I type a task name "MyTodo"
-#    And I click in the ask question button
-#When I finish this task with a check
-#    And I navigate to Tasks section
-#    And I select the 'My completed tasks' option
-#Then the Completed task should appears in the panel of tasks
+Scenario: Assign Tasks to myself and complete it
+Given I go to the Team created "TheTeam"
+    And I click in the task button in the post section
+    And I select the 'Add a #todo' button
+    And I type a task name "MyTodo"
+    And I click in the ask question button
+When I finish this task with a check
+    And I navigate to Tasks section
+    And I select the 'My completed tasks' option
+Then the Completed task should appears in the panel of tasks

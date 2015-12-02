@@ -7,7 +7,6 @@ Background:
 Given I am logged on the page with user "jorgetop14@gmail.com" and Password "Control123"
   And I have a team "TheTeam" created
 
-@uploadImage
 Scenario: upload an image as a post in a voting
 Given I navigate to files section
   And I select the team "TheTeam"
