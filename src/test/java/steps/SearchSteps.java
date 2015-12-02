@@ -1,6 +1,5 @@
 package steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -8,7 +7,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import junit.framework.Assert;
 import ui.pages.ContainerPage;
-import ui.pages.SearchPage;
 
 /**
  * Created by jorgeavila on 11/17/2015.

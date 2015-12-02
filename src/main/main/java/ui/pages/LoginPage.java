@@ -22,18 +22,16 @@ public class LoginPage extends BasePageObject {
     protected WebElement loginButton;
 
     public LoginPage(){
-//        waitUntilPageObjectIsLoaded();
     }
 
     public LoginPage typeUserName(String username){
-//        waitUntilPageObjectIsLoaded();
-//        this.username.clear();
+        this.username.clear();
         this.username.sendKeys(username);
         return this;
     }
 
     public LoginPage typeUserPassword(String password){
-//        this.password.clear();
+        this.password.clear();
         this.password.sendKeys(password);
         return this;
     }

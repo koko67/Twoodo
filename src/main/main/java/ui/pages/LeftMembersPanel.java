@@ -6,14 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ui.BasePageObject;
 
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by jorgeavila on 11/16/2015.
  */
 public class LeftMembersPanel extends BasePageObject {
-
-    public final static String ADD_TEAMMATE = "Add a teammate";
 
     @FindBy(xpath = "//div[@class='section']/a[@class='title' and contains(text(),'Direct messages')]/..")
     WebElement membersPanel;

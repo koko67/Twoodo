@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import ui.BasePageObject;
 
 /**
@@ -25,8 +24,6 @@ public class LeftTeamsPanel extends BasePageObject {
     private static String teamXpath = "a[.//span[contains(text(),'#team#')]]";
 
     public TeamsCreationPage clickCreateNewTeam(){
-//        wait.until(ExpectedConditions.visibilityOf(teamsContainer));
-//        clickElementForCreationByText(CREATION);
         buttonCreationTeam.click();
         return new TeamsCreationPage();
     }
